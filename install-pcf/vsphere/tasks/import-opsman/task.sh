@@ -5,7 +5,8 @@ set -eu
 file_path=`find ./pivnet-opsman-product/ -name *.ova`
 
 echo $file_path
-
+echo "Ready to sleep"
+sleep 20
 govc import.spec $file_path | python -m json.tool > om-import.json
 
 cat > filters <<'EOF'
