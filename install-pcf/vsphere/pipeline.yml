@@ -9,7 +9,7 @@ resources:
 - name: pcf-pipelines
   type: git
   source:
-    uri: git@github.com:honnuanand/pcf-pipelines.git
+    uri: https://github.com/honnuanand/pcf-pipelines.git
     branch: govctest
 
 - name: pcf-ops-manager

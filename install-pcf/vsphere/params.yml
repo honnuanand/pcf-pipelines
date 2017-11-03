@@ -1,30 +1,29 @@
 # Pipeline resource configuration
-pivnet_token:             # Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
+pivnet_token: "U9MTxgzJGzQsf5zeg9wy"             # Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
 opsman_major_minor_version: ^1\.12\..*$ # PCF Ops Manager minor version to track
 ert_major_minor_version: ^1\.12\..*$ # PCF Elastic Runtime minor version to track
-git_private_key:
 
 # vCenter configuration
-vcenter_host:             # vCenter host or IP
-vcenter_usr:              # vCenter username. If user is tied to a domain, then escape the \, example `domain\\user`
-vcenter_pwd:              # vCenter password
-vcenter_data_center:      # vCenter datacenter
+vcenter_host: vcsa.home.clue2solve.com             # vCenter host or IP
+vcenter_usr: anand@clue2solve.com              # vCenter username. If user is tied to a domain, then escape the \, example `domain\\user`
+vcenter_pwd: Andy123$             # vCenter password
+vcenter_data_center: Datacenter      # vCenter datacenter
 
 # Ops Manager VM configuration
 om_vm_host:               # Optional - vCenter host to deploy Ops Manager in
-om_data_store:            # vCenter datastore name to deploy Ops Manager in
-opsman_domain_or_ip_address:               # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
-opsman_admin_username:    # Username for Ops Manager admin account
-opsman_admin_password:    # Password for Ops Manager admin account
-om_ssh_pwd:               # SSH password for Ops Manager (ssh user is ubuntu)
-om_decryption_pwd:        # Decryption password for Ops Manager exported settings
-om_ntp_servers:           # Comma-separated list of NTP Servers
-om_dns_servers:           # Comma-separated list of DNS Servers
-om_gateway:               # Gateway for Ops Manager network
-om_netmask:               # Netmask for Ops Manager network
-om_ip:                    # IP to assign to Ops Manager VM
-om_vm_network:            # vCenter network name to use to deploy Ops Manager in
-om_vm_name:               # Name to use for Ops Manager VM
+om_data_store: WD-5TB-MEGASTORE            # vCenter datastore name to deploy Ops Manager in
+opsman_domain_or_ip_address: pcfops.home.clue2solve.com              # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
+opsman_admin_username: admin    # Username for Ops Manager admin account
+opsman_admin_password: j1nxedr00t    # Password for Ops Manager admin account
+om_ssh_pwd: j1nxedr00t               # SSH password for Ops Manager (ssh user is ubuntu)
+om_decryption_pwd: "my name is anand"        # Decryption password for Ops Manager exported settings
+om_ntp_servers: "10.0.2.1"           # Comma-separated list of NTP Servers
+om_dns_servers: "10.0.2.1"           # Comma-separated list of DNS Servers
+om_gateway: "10.0.2.1"               # Gateway for Ops Manager network
+om_netmask: "255.255.255.0"              # Netmask for Ops Manager network
+om_ip: "10.0.10.6"                   # IP to assign to Ops Manager VM
+om_vm_network: "VM Network"            # vCenter network name to use to deploy Ops Manager in
+om_vm_name: "ops-mgr"              # Name to use for Ops Manager VM
 opsman_disk_type: "thin"  # Disk type for Ops Manager VM (thick|thin)
 om_vm_power_state: true   # Whether to power on Ops Manager VM after creation
 
@@ -34,8 +33,8 @@ om_vm_power_state: true   # Whether to power on Ops Manager VM after creation
 #   resource pool: /<Data Center Name>/host/<Cluster Name>/Resources/<Resource Pool Name>
 om_resource_pool:
 
-ephemeral_storage_names:  # Ephemeral Storage names in vCenter for use by PCF
-persistent_storage_names: # Persistent Storage names in vCenter for use by PCF
+ephemeral_storage_names: WD-5TB-MEGASTORE   # Ephemeral Storage names in vCenter for use by PCF
+persistent_storage_names: WD-5TB-MEGASTORE  # Persistent Storage names in vCenter for use by PCF
 
 bosh_vm_folder: "pcf_vms"                 # vSphere datacenter folder (such as pcf_vms) where VMs will be placed
 bosh_template_folder: "pcf_templates"     # vSphere datacenter folder (such as pcf_templates) where templates will be placed
@@ -45,17 +44,17 @@ trusted_certificates:         # Trusted certificates to be deployed along with a
 vm_disk_type: "thick"         # Disk type for BOSH provisioned VM. (thick|thin)
 
 # AZ configuration for Ops Director
-az_1_name:                    # Logical name of availability zone. No spaces or special characters.
-az_1_cluster_name:            # Name of cluster in vCenter for AZ1
+az_1_name: az1                   # Logical name of availability zone. No spaces or special characters.
+az_1_cluster_name: Cluster-1           # Name of cluster in vCenter for AZ1
 az_1_rp_name:                 # Resource pool name in vCenter for AZ1
-az_2_name:                    # Logical name of availability zone. No spaces or special characters.
-az_2_cluster_name:            # Name of cluster in vCenter for AZ2
+az_2_name: az2                   # Logical name of availability zone. No spaces or special characters.
+az_2_cluster_name: Cluster-1           # Name of cluster in vCenter for AZ2
 az_2_rp_name:                 # Resource pool name in vCenter for AZ2
-az_3_name:                    # Logical name of availability zone. No spaces or special characters.
-az_3_cluster_name:            # Name of cluster in vCenter for AZ3
+az_3_name: az3                    # Logical name of availability zone. No spaces or special characters.
+az_3_cluster_name: Cluster-1            # Name of cluster in vCenter for AZ3
 az_3_rp_name:                 # Resource pool name in vCenter for AZ3
 
-ntp_servers:                  # Comma-separated list of NTP servers to use for VMs deployed by BOSH
+ntp_servers: "10.0.2.1"                 # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 ops_dir_hostname:             # Optional DNS name for Ops Director. Should be reachable from all networks.
 enable_vm_resurrector: true   # Whether to enable BOSH VM resurrector
 max_threads: 30               # Max threads count for deploying VMs
@@ -64,48 +63,48 @@ max_threads: 30               # Max threads count for deploying VMs
 icmp_checks_enabled: true     # Enable or disable ICMP checks
 
 infra_network_name: "INFRASTRUCTURE"
-infra_vsphere_network:        # vCenter Infrastructure network name
-infra_nw_cidr:                # Infrastructure network CIDR, ex: 10.0.0.0/22
-infra_excluded_range:         # Infrastructure network exclusion range
-infra_nw_dns:                 # Infrastructure network DNS
-infra_nw_gateway:             # Infrastructure network Gateway
-infra_nw_azs:                 # Comma separated list of AZ's to be associated with this network
-nsx_networking_enabled: false # (true|false) to use nsx networking feature 
+infra_vsphere_network: "VM Network"        # vCenter Infrastructure network name
+infra_nw_cidr: "10.0.11.0/24"               # Infrastructure network CIDR, ex: 10.0.0.0/22
+infra_excluded_range: "10.0.11.1-10.0.11.23,10.0.11.50-10.0.11.255"         # Infrastructure network exclusion range
+infra_nw_dns: "10.0.2.1"                 # Infrastructure network DNS
+infra_nw_gateway: "10.0.2.1"             # Infrastructure network Gateway
+infra_nw_azs: "10.0.2.1"                 # Comma separated list of AZ's to be associated with this network
+nsx_networking_enabled: false # (true|false) to use nsx networking feature
 nsx_address:                  # address of nsx
 nsx_username:                 # username for nsx access
 nsx_password:                 # password for nsx access
 nsx_ca_certificate:           # cert for nsx
 
 deployment_network_name: "DEPLOYMENT"
-deployment_vsphere_network:   # vCenter Deployment network name
-deployment_nw_cidr:           # Deployment network CIDR, ex: 10.0.0.0/22
-deployment_excluded_range:    # Deployment network exclusion range
-deployment_nw_dns:            # Deployment network DNS
-deployment_nw_gateway:        # Deployment network Gateway
-deployment_nw_azs:            # Comma separated list of AZ's to be associated with this network
+deployment_vsphere_network: "VM Network"   # vCenter Deployment network name
+deployment_nw_cidr: "10.0.11.0/24"            # Deployment network CIDR, ex: 10.0.0.0/22
+deployment_excluded_range: "10.0.11.1-10.0.11-49,10.0.11.100-10.0.11.255"    # Deployment network exclusion range
+deployment_nw_dns: "10.0.2.1"             # Deployment network DNS
+deployment_nw_gateway: "10.0.2.1"         # Deployment network Gateway
+deployment_nw_azs: "az2"            # Comma separated list of AZ's to be associated with this network
 
 services_network_name: "SERVICES"
-is_service_network:           # Required select service network option in Ops man true or false
-services_vsphere_network:     # vCenter Services network name
-services_nw_cidr:             # Services network CIDR, ex: 10.0.0.0/22
+is_service_network: "10.0.11.1-10.0.11.99,10.0.11.150-10.0.11.255"           # Required select service network option in Ops man true or false
+services_vsphere_network: "VM Network"     # vCenter Services network name
+services_nw_cidr: "10.0.11.0/24"              # Services network CIDR, ex: 10.0.0.0/22
 services_excluded_range:      # Services network exclusion range
-services_nw_dns:              # Services network DNS
-services_nw_gateway:          # Services network Gateway
-services_nw_azs:              # Comma separated list of AZ's to be associated with this network
+services_nw_dns: "10.0.2.1"               # Services network DNS
+services_nw_gateway: "10.0.2.1"           # Services network Gateway
+services_nw_azs: "az3"             # Comma separated list of AZ's to be associated with this network
 
 dynamic_services_network_name: "DYNAMIC-SERVICES"
-dynamic_services_vsphere_network:     # vCenter Dynamic Services network name
-dynamic_services_nw_cidr:             # Dynamic Services network CIDR, ex: 10.0.0.0/22
-dynamic_services_excluded_range:      # Dynamic Services network exclusion range
-dynamic_services_nw_dns:              # Dynamic Services network DNS
-dynamic_services_nw_gateway:          # Dynamic Services network Gateway
-dynamic_services_nw_azs:              # Comma separated list of AZ's to be associated with this network
+dynamic_services_vsphere_network: "VM Network"     # vCenter Dynamic Services network name
+dynamic_services_nw_cidr: "10.0.11.0/24"              # Dynamic Services network CIDR, ex: 10.0.0.0/22
+dynamic_services_excluded_range: "10.0.11.1-10.0.11.149,10.0.11.200-10.0.11.255"      # Dynamic Services network exclusion range
+dynamic_services_nw_dns: "10.0.2.1"               # Dynamic Services network DNS
+dynamic_services_nw_gateway: "10.0.2.1"           # Dynamic Services network Gateway
+dynamic_services_nw_azs: "az3"              # Comma separated list of AZ's to be associated with this network
 
-ert_singleton_job_az:         # AZ to use for deployment of ERT Singleton jobs
+ert_singleton_job_az: "az2"         # AZ to use for deployment of ERT Singleton jobs
 ert_errands_to_disable:       # Comma-separated list of errand names to disable before deploy
 
-loggregator_endpoint_port:    # Loggegrator Port. Default is 443
-company_name:                 # Company Name for Apps Manager
+loggregator_endpoint_port: 443    # Loggegrator Port. Default is 443
+company_name: "Clue2Solve"                 # Company Name for Apps Manager
 company_proxy_domain:         # If set to a non-empty string, bypass DNS when uploading stemcells to Ops Manager
 
 ## Syslog endpoint configuration goes here
@@ -204,7 +203,7 @@ mysql_backups_s3_secret_access_key:
 mysql_backups_s3_cron_schedule:
 
 ## Default resource configuration
-## these resources can take any parameter made available in 
+## these resources can take any parameter made available in
 ## the ops manager API ( https://<your-ops-man/docs#configuring-resources-for-a-job )
 consul_server_instances: 3
 nats_instances: 2
