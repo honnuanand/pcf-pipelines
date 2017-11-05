@@ -86,6 +86,11 @@ az_configuration=$(cat <<-EOF
 EOF
 )
 
+echo "AZ Configuration ready for being applied :"
+echo $az_configuration
+
+
+
 echo "Preparing Network "
 echo '
 {
@@ -150,8 +155,7 @@ echo '
   ]
 }'
 
-echo "AZ Configuration ready for being applied :"
-echo $az_configuration
+
 
 network_configuration=$(
   jq -n \
