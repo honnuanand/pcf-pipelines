@@ -1,6 +1,25 @@
 #!/bin/bash
 
 set -eu
+echo '
+{
+  "vcenter_host": $vcenter_host,
+  "vcenter_username": $vcenter_username,
+  "vcenter_password": $vcenter_password,
+  "datacenter": $datacenter,
+  "disk_type": $disk_type,
+  "ephemeral_datastores_string": $ephemeral_datastores_string,
+  "persistent_datastores_string": $persistent_datastores_string,
+  "bosh_vm_folder": $bosh_vm_folder,
+  "bosh_template_folder": $bosh_template_folder,
+  "bosh_disk_path": $bosh_disk_path,
+  "ssl_verification_enabled": $ssl_verification_enabled,
+  "nsx_networking_enabled": $nsx_networking_enabled,
+  "nsx_address": $nsx_address,
+  "nsx_username": $nsx_username,
+  "nsx_password": $nsx_password,
+  "nsx_ca_certificate": $nsx_ca_certificate
+}'
 
 iaas_configuration=$(
   jq -n \
@@ -41,6 +60,9 @@ iaas_configuration=$(
   }'
 )
 
+echo "IAAS Configuration ready for being applied :"
+echo $iaas_configuration
+
 az_configuration=$(cat <<-EOF
 {
   "availability_zones": [
@@ -63,6 +85,10 @@ az_configuration=$(cat <<-EOF
 }
 EOF
 )
+
+
+echo "AZ Configuration ready for being applied :"
+echo $az_configuration
 
 network_configuration=$(
   jq -n \
@@ -159,6 +185,10 @@ network_configuration=$(
       ]
     }'
 )
+echo "Network Configuration ready for being applied :"
+echo $network_configuration
+
+
 
 director_config=$(cat <<-EOF
 {
@@ -172,6 +202,10 @@ director_config=$(cat <<-EOF
 EOF
 )
 
+echo "Director Configuration ready for being applied :"
+echo $director_config
+
+
 security_configuration=$(
   jq -n \
     --arg trusted_certificates "$TRUSTED_CERTIFICATES" \
@@ -181,6 +215,9 @@ security_configuration=$(
       "vm_password_type": "generate"
     }'
 )
+
+echo "Security Configuration ready for being applied :"
+echo $security_configuration
 
 network_assignment=$(
 jq -n \
@@ -192,6 +229,9 @@ jq -n \
     "network": $network
   }'
 )
+
+echo "Network Assignment ready for being applied :"
+echo $network_assignment
 
 echo "Configuring IaaS and Director..."
 om-linux \
