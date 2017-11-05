@@ -155,7 +155,7 @@ echo '
   ]
 }'
 
-
+sleep 25
 
 network_configuration=$(
   jq -n \
